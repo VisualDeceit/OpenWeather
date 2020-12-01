@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		15654BF725769BE4006DD81E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15654BF625769BE4006DD81E /* AppDelegate.swift */; };
 		15654BF925769BE4006DD81E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15654BF825769BE4006DD81E /* SceneDelegate.swift */; };
-		15654BFB25769BE4006DD81E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15654BFA25769BE4006DD81E /* ViewController.swift */; };
 		15654BFE25769BE4006DD81E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15654BFC25769BE4006DD81E /* Main.storyboard */; };
 		15654C0025769BE6006DD81E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15654BFF25769BE6006DD81E /* Assets.xcassets */; };
 		15654C0325769BE6006DD81E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15654C0125769BE6006DD81E /* LaunchScreen.storyboard */; };
+		15654C0D25769F65006DD81E /* LoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15654C0C25769F65006DD81E /* LoginFormController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		15654BF325769BE4006DD81E /* OpenWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15654BF625769BE4006DD81E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		15654BF825769BE4006DD81E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		15654BFA25769BE4006DD81E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		15654BFD25769BE4006DD81E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		15654BFF25769BE6006DD81E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		15654C0225769BE6006DD81E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		15654C0425769BE6006DD81E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15654C0C25769F65006DD81E /* LoginFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +58,8 @@
 			children = (
 				15654BF625769BE4006DD81E /* AppDelegate.swift */,
 				15654BF825769BE4006DD81E /* SceneDelegate.swift */,
-				15654BFA25769BE4006DD81E /* ViewController.swift */,
 				15654BFC25769BE4006DD81E /* Main.storyboard */,
+				15654C0C25769F65006DD81E /* LoginFormController.swift */,
 				15654BFF25769BE6006DD81E /* Assets.xcassets */,
 				15654C0125769BE6006DD81E /* LaunchScreen.storyboard */,
 				15654C0425769BE6006DD81E /* Info.plist */,
@@ -137,7 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15654BFB25769BE4006DD81E /* ViewController.swift in Sources */,
+				15654C0D25769F65006DD81E /* LoginFormController.swift in Sources */,
 				15654BF725769BE4006DD81E /* AppDelegate.swift in Sources */,
 				15654BF925769BE4006DD81E /* SceneDelegate.swift in Sources */,
 			);
@@ -296,7 +296,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.50.AlexanderFomin.OpenWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -315,7 +315,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.50.AlexanderFomin.OpenWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
