@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,14 +13,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LoginFormController" customModule="OpenWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uea-bZ-JQ3">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aFo-tJ-cGX">
-                                        <rect key="frame" x="132" y="208.5" width="150" height="34"/>
+                                        <rect key="frame" x="112.5" y="208.5" width="150" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="IYd-rn-dla"/>
                                         </constraints>
@@ -28,19 +28,19 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmt-bO-I8r">
-                                        <rect key="frame" x="74" y="60" width="266.5" height="48"/>
+                                        <rect key="frame" x="54.5" y="60" width="266.5" height="48"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfj-fW-ph3">
-                                        <rect key="frame" x="132" y="302.5" width="73.5" height="21"/>
+                                        <rect key="frame" x="112.5" y="302.5" width="73.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c2D-qN-43H">
-                                        <rect key="frame" x="132" y="343.5" width="150" height="34"/>
+                                        <rect key="frame" x="112.5" y="343.5" width="150" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="Hdh-EH-cgq"/>
                                         </constraints>
@@ -48,11 +48,14 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fla-lT-TbD">
-                                        <rect key="frame" x="185" y="407.5" width="44" height="30"/>
+                                        <rect key="frame" x="165.5" y="407.5" width="44" height="30"/>
                                         <state key="normal" title="Войти"/>
+                                        <connections>
+                                            <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cWg-x3-eTb"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4J-Uv-CNW">
-                                        <rect key="frame" x="132" y="168" width="37" height="20.5"/>
+                                        <rect key="frame" x="112.5" y="168" width="37" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -89,6 +92,11 @@
                             <constraint firstItem="Uea-bZ-JQ3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wcF-hT-xh4"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginInput" destination="aFo-tJ-cGX" id="vVn-3H-uAs"/>
+                        <outlet property="passwordInput" destination="c2D-qN-43H" id="SBZ-9M-tAg"/>
+                        <outlet property="scrollView" destination="Uea-bZ-JQ3" id="meA-9v-IUx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

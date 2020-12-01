@@ -9,6 +9,11 @@ import UIKit
 
 class LoginFormController: UIViewController {
 
+    @IBOutlet var loginInput: UITextField!
+    @IBOutlet var passwordInput: UITextField!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBAction func loginButtonPressed(_ sender: Any) {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
