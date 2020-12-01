@@ -12,7 +12,20 @@ class LoginFormController: UIViewController {
     @IBOutlet var loginInput: UITextField!
     @IBOutlet var passwordInput: UITextField!
     @IBOutlet var scrollView: UIScrollView!
+    
     @IBAction func loginButtonPressed(_ sender: Any) {
+        // Получаем текст логина
+        let login = loginInput.text!
+        // Получаем текст-пароль
+        let password = passwordInput.text!
+        
+        // Проверяем, верны ли они
+        if login == "admin" && password == "0000" {
+            print("успешная авторизация")
+        } else {
+            print("неуспешная авторизация")
+        }
+
     }
     
     override func viewDidLoad() {
