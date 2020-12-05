@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class LoginFormController: UIViewController {
 
     @IBOutlet var loginInput: UITextField!
@@ -14,18 +16,58 @@ class LoginFormController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        // Получаем текст логина
-        let login = loginInput.text!
-        // Получаем текст-пароль
-        let password = passwordInput.text!
-        
-        // Проверяем, верны ли они
-        if login == "admin" && password == "0000" {
-            print("успешная авторизация")
-        } else {
-            print("неуспешная авторизация")
-        }
+//        // Получаем текст логина
+//        let login = loginInput.text!
+//        // Получаем текст-пароль
+//        let password = passwordInput.text!
+//
+//        // Проверяем, верны ли они
+//        if login == "admin" && password == "0000" {
+//            print("успешная авторизация")
+//        } else {
+//            print("неуспешная авторизация")
+//        }
 
+    }
+    
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard checkUserData() else {
+            showAlert()
+            loginInput.text = ""
+            passwordInput.text = ""
+            return false
+        }
+        return true
+
+    }
+    
+    func checkUserData() -> Bool {
+        guard
+            let login = loginInput.text,
+            let password = passwordInput.text
+        else {
+            return false
+        }
+        return login == "admin" && password == "0000"
+    }
+
+    
+    private func showAlert() {
+        let alert = UIAlertController(title: "Error", message: "Invalid user data entered", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -35,7 +77,14 @@ class LoginFormController: UIViewController {
         let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         // Присваиваем его UIScrollVIew
         scrollView?.addGestureRecognizer(hideKeyboardGesture)
-
+        
+        //цвет бара
+        //navigationController?.navigationBar.barTintColor = UIColorFromRGB(rgbValue: 0xBB654C)
+        //navigationController?.navigationBar.backgroundColor = UIColorFromRGB(rgbValue: 0xBB654C)
+        //цвет кнопки
+        navigationController?.navigationBar.tintColor = UIColor.white
+        //цвет текста
+        //navigationController?.navigationBar.titleTextAttributes =
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +94,8 @@ class LoginFormController: UIViewController {
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
             // Второе — когда она пропадает
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        //прячем бар
+        navigationController?.navigationBar.isHidden = true
         }
     
     
@@ -53,6 +104,7 @@ class LoginFormController: UIViewController {
             
             NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
             NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        navigationController?.navigationBar.isHidden = false
         }
 
     
