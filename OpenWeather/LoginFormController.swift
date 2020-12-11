@@ -51,6 +51,7 @@ class LoginFormController: UIViewController {
 
     }
     
+    // MARK: - Проверка авторизации
     func checkUserData() -> Bool {
         guard
             let login = loginInput.text,
@@ -61,7 +62,7 @@ class LoginFormController: UIViewController {
         return login == "0" && password == "0"
     }
 
-    
+    // MARK:  - Показ alert
     private func showAlert() {
         let alert = UIAlertController(title: "Error", message: "Invalid user data entered", preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)

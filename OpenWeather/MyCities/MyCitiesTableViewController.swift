@@ -15,27 +15,29 @@ class MyCitiesTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    
+    // MARK: - Добавление города
     @IBAction func addCity(segue: UIStoryboardSegue) {
         // Проверяем идентификатор перехода, чтобы убедиться, что это нужный
         if segue.identifier == "addCity" {
-        // Получаем ссылку на контроллер, с которого осуществлен переход
+            // Получаем ссылку на контроллер, с которого осуществлен переход
             guard let allCitiesController = segue.source as? CitiesListTableViewController else { return }
-        // Получаем индекс выделенной ячейки
+            // Получаем индекс выделенной ячейки
             if let indexPath = allCitiesController.tableView.indexPathForSelectedRow {
-        // Получаем город по индексу
+                // Получаем город по индексу
                 let city = allCitiesController.citiesList[indexPath.row]
-        // Проверяем, что такого города нет в списке
+                // Проверяем, что такого города нет в списке
                 if !cities.contains(city) {
-        // Добавляем город в список выбранных
+                    // Добавляем город в список выбранных
                     cities.append(city)
-        // Обновляем таблицу
+                    // Обновляем таблицу
                     tableView.reloadData()
                 }
             }
         }
-
-
-        }
+        
+        
+    }
 
 
     // MARK: - Table view data source
