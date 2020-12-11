@@ -58,7 +58,7 @@ class LoginFormController: UIViewController {
         else {
             return false
         }
-        return login == "admin" && password == "0000"
+        return login == "0" && password == "0"
     }
 
     
