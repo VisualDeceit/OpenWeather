@@ -17,8 +17,7 @@ import UIKit
         var gradientLayer: CAGradientLayer {
             return self.layer as! CAGradientLayer
         }
-    
-    
+        
     @IBInspectable var startColor: UIColor = UIColor(red: 187.0, green: 101.0, blue: 76.0, alpha: 1.0) {
         didSet {
             self.updateColors()
