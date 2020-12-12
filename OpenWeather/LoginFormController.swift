@@ -15,21 +15,6 @@ class LoginFormController: UIViewController {
     @IBOutlet var passwordInput: UITextField!
     @IBOutlet var scrollView: UIScrollView!
     
-    @IBAction func loginButtonPressed(_ sender: Any) {
-//        // Получаем текст логина
-//        let login = loginInput.text!
-//        // Получаем текст-пароль
-//        let password = passwordInput.text!
-//
-//        // Проверяем, верны ли они
-//        if login == "admin" && password == "0000" {
-//            print("успешная авторизация")
-//        } else {
-//            print("неуспешная авторизация")
-//        }
-
-    }
-    
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
@@ -38,7 +23,6 @@ class LoginFormController: UIViewController {
             alpha: CGFloat(1.0)
         )
     }
-    
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard checkUserData() else {
