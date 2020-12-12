@@ -8,8 +8,7 @@
 import UIKit
 
 class WeatherCell: UICollectionViewCell {
-    
+    @IBOutlet var image: UIImageView!
+    @IBOutlet var date: UILabel!
     @IBOutlet var weather: UILabel!
-    @IBOutlet var icon: UIImageView!
-    @IBOutlet var time: UILabel!
 }
