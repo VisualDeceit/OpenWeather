@@ -272,6 +272,7 @@
                     <navigationItem key="navigationItem" id="gbE-c5-TcH"/>
                     <connections>
                         <outlet property="myWatherCollectionView" destination="MZR-iz-DEf" id="pEw-un-y18"/>
+                        <outlet property="weekDayPicker" destination="ZjJ-x4-P7E" id="8kz-R2-5UR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqY-QK-d0i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

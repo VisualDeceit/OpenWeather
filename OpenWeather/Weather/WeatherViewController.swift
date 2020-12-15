@@ -10,10 +10,17 @@ import UIKit
 class WeatherViewController: UIViewController {
     
     @IBOutlet var myWatherCollectionView: WeatherCollectionView!
+    @IBOutlet var weekDayPicker: WeekDayPicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //ловим sendActions(for: .valueChanged)
+        weekDayPicker.addTarget(self, action: #selector(dayIsSelected), for: .valueChanged)
+    }
+    
+    //обрабатываем 
+    @objc func dayIsSelected(){
+        print(weekDayPicker.selectedDay?.title ?? "")
     }
 
 }

@@ -31,7 +31,7 @@ enum Day: Int {
     }
 }
 
-class WeekDayPicker: UIControl {
+@IBDesignable class WeekDayPicker: UIControl {
     
     override init(frame: CGRect) {
             super.init(frame: frame)
@@ -46,6 +46,7 @@ class WeekDayPicker: UIControl {
     var selectedDay: Day? = nil {
         didSet {
             self.updateSelectedDay()
+            //посылаем событие при изменении дня
             self.sendActions(for: .valueChanged)
 
         }
