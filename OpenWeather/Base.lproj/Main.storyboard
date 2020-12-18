@@ -143,34 +143,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" red="0.9778898358" green="0.63812470440000002" blue="0.47447049619999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MyCitiesCell" textLabel="XYR-nF-lih" imageView="A5F-sY-Fvv" style="IBUITableViewCellStyleDefault" id="gqF-nd-Pp4" customClass="MyCityTableViewCell" customModule="OpenWeather" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gqF-nd-Pp4" id="moc-Ss-TNw">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XYR-nF-lih">
-                                            <rect key="frame" x="55" y="0.0" width="285" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.86031395200000005" green="0.46120947600000001" blue="0.32937198880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="thermometer" catalog="system" id="A5F-sY-Fvv">
-                                            <rect key="frame" x="20.5" y="12" width="15" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="tintColor" red="0.85882352941176465" green="0.46274509803921571" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="cityName" destination="XYR-nF-lih" id="p1O-Bu-b12"/>
-                                    <segue destination="iON-RQ-4VP" kind="show" id="Jdj-qA-3Qi"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="Hro-a9-H4D" id="FGA-Mt-INB"/>
@@ -181,10 +153,13 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7ms-8D-fHj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="dU9-hJ-yAk" kind="show" id="tpG-cA-8rR"/>
+                                <segue destination="dU9-hJ-yAk" kind="show" identifier="" id="tpG-cA-8rR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="iON-RQ-4VP" kind="show" identifier="ShowForecast" id="SKc-4A-dAs"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="quo-lF-sP3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -312,38 +287,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cityCell" id="p7Q-Wq-VZ7" customClass="CityTableViewCell" customModule="OpenWeather" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p7Q-Wq-VZ7" id="6kZ-tU-MYR">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhA-TY-9HI">
-                                            <rect key="frame" x="166.5" y="11.5" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="vhA-TY-9HI" firstAttribute="centerX" secondItem="6kZ-tU-MYR" secondAttribute="centerX" id="Al3-uN-MRf"/>
-                                        <constraint firstItem="vhA-TY-9HI" firstAttribute="centerY" secondItem="6kZ-tU-MYR" secondAttribute="centerY" id="oGu-Tj-JpY"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="cityLabel" destination="vhA-TY-9HI" id="Wkv-6F-uoD"/>
-                                    <segue destination="rgF-rG-mzj" kind="unwind" identifier="addCity" unwindAction="addCityWithSegue:" id="FuU-0v-vRj"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="dU9-hJ-yAk" id="t6u-s7-yjG"/>
                             <outlet property="delegate" destination="dU9-hJ-yAk" id="IWM-lS-1FJ"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Cities list" id="SRt-lA-HMf"/>
+                    <connections>
+                        <segue destination="rgF-rG-mzj" kind="unwind" identifier="addCity" unwindAction="addCityWithSegue:" id="1o5-9x-OPA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cff-Zw-rQW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="rgF-rG-mzj" userLabel="Exit" sceneMemberID="exit"/>
@@ -353,7 +305,6 @@
     </scenes>
     <resources>
         <image name="clouds-1" width="512" height="512"/>
-        <image name="thermometer" catalog="system" width="93" height="128"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
