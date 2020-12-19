@@ -57,15 +57,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1504D92225838AEE00B4EBEE /* Weather */ = {
-			isa = PBXGroup;
-			children = (
-				1504D92625838B2200B4EBEE /* WeatherCell.swift */,
-				1504D9802584FB0400B4EBEE /* WeatherCollectionView.swift */,
-			);
-			path = Weather;
-			sourceTree = "<group>";
-		};
 		15654BEA25769BE4006DD81E = {
 			isa = PBXGroup;
 			children = (
@@ -85,20 +76,16 @@
 		15654BF525769BE4006DD81E /* OpenWeather */ = {
 			isa = PBXGroup;
 			children = (
-				15D2C6C3258D0F1100D83F27 /* Controllers */,
-				15D2C6BD258D0D2700D83F27 /* Models */,
-				1504D92225838AEE00B4EBEE /* Weather */,
+				15654C0425769BE6006DD81E /* Info.plist */,
 				15654BF625769BE4006DD81E /* AppDelegate.swift */,
 				15654BF825769BE4006DD81E /* SceneDelegate.swift */,
-				15654BFC25769BE4006DD81E /* Main.storyboard */,
-				15654C0C25769F65006DD81E /* LoginFormController.swift */,
 				15654BFF25769BE6006DD81E /* Assets.xcassets */,
-				15654C0125769BE6006DD81E /* LaunchScreen.storyboard */,
-				15654C0425769BE6006DD81E /* Info.plist */,
-				1504D9762584E59600B4EBEE /* GradientView.swift */,
-				1504D9792584EF9900B4EBEE /* WeekDayPicker.swift */,
-				15D2C6AF258CEE3B00D83F27 /* CityTableViewCell.swift */,
-				15D2C6B0258CEE3B00D83F27 /* CityTableViewCell.xib */,
+				15D45D42258D274D00D50382 /* Cells */,
+				15D2C6C3258D0F1100D83F27 /* Controllers */,
+				15D45D43258D277900D50382 /* Controls */,
+				15D2C6BD258D0D2700D83F27 /* Models */,
+				15D45D46258D280F00D50382 /* Storyboards */,
+				15D45D44258D27B400D50382 /* Views */,
 			);
 			path = OpenWeather;
 			sourceTree = "<group>";
@@ -114,11 +101,48 @@
 		15D2C6C3258D0F1100D83F27 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				15654C0C25769F65006DD81E /* LoginFormController.swift */,
 				1504D9832585017A00B4EBEE /* WeatherViewController.swift */,
 				15DA53DA257F74BF006353DA /* CitiesListTableViewController.swift */,
 				1504D91C258384BA00B4EBEE /* MyCitiesTableViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		15D45D42258D274D00D50382 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				15D2C6AF258CEE3B00D83F27 /* CityTableViewCell.swift */,
+				15D2C6B0258CEE3B00D83F27 /* CityTableViewCell.xib */,
+				1504D92625838B2200B4EBEE /* WeatherCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		15D45D43258D277900D50382 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				1504D9792584EF9900B4EBEE /* WeekDayPicker.swift */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		15D45D44258D27B400D50382 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1504D9802584FB0400B4EBEE /* WeatherCollectionView.swift */,
+				1504D9762584E59600B4EBEE /* GradientView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		15D45D46258D280F00D50382 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				15654BFC25769BE4006DD81E /* Main.storyboard */,
+				15654C0125769BE6006DD81E /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -14,7 +14,6 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //ловим sendActions(for: .valueChanged)
         weekDayPicker.addTarget(self, action: #selector(dayIsSelected), for: .valueChanged)
     }
     
