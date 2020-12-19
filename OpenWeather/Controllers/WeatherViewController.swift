@@ -27,7 +27,7 @@ class WeatherViewController: UIViewController {
 
 }
 
-extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         10
     }
@@ -38,10 +38,22 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
         WeatherCell
         else { return UICollectionViewCell() }
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        
         cell.tempLabel.text = "+30"
-        cell.dateLabel.text = "\(Int.random(in: 1..<24))ч"
-        cell.imageView.image = UIImage(named: "sunny")
+        cell.dateLabel.text = dateFormatter.string(from: Date())
+        cell.imageView.image = UIImage(named: "storm")
         return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width / 2
+        let size = CGSize(width: width, height: width)
+        return size
     }
     
     
