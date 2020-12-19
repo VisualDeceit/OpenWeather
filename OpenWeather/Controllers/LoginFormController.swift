@@ -43,7 +43,7 @@ class LoginFormController: UIViewController {
         else {
             return false
         }
-        return login == "0" && password == "0"
+        return login == "" && password == ""
     }
 
     // MARK:  - Показ alert

@@ -14,7 +14,10 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         weekDayPicker.addTarget(self, action: #selector(dayIsSelected), for: .valueChanged)
+        //регистрируем ячейку
+        myWatherCollectionView.register(UINib(nibName: "WeatherCell", bundle: nil), forCellWithReuseIdentifier: "WeatherCell")
     }
     
     //обрабатываем 
@@ -35,8 +38,9 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
         WeatherCell
         else { return UICollectionViewCell() }
         
-        cell.weather.text = "30 C"
-        cell.date.text = "\(Date())"
+        cell.tempLabel.text = "+30"
+        cell.dateLabel.text = "\(Int.random(in: 1..<24))ч"
+        cell.imageView.image = UIImage(named: "sunny")
         return cell
     }
     

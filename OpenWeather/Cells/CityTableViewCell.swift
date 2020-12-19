@@ -19,10 +19,6 @@ class CityTableViewCell: UITableViewCell {
         cityImageView.image = nil
     }
     
-    override func layoutIfNeeded() {
-        super.layoutIfNeeded()
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         cityImageView.contentMode = .scaleAspectFill
