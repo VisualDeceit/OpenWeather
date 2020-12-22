@@ -124,9 +124,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="Vxf-IR-KXp"/>
                     <connections>
+                        <outlet property="logInButton" destination="Fla-lT-TbD" id="lc2-2e-qLg"/>
                         <outlet property="loginInput" destination="aFo-tJ-cGX" id="vVn-3H-uAs"/>
+                        <outlet property="loginTitleView" destination="P4J-Uv-CNW" id="f50-L7-LT9"/>
                         <outlet property="passwordInput" destination="c2D-qN-43H" id="SBZ-9M-tAg"/>
+                        <outlet property="passwordTitleView" destination="kfj-fW-ph3" id="w32-S6-hpD"/>
                         <outlet property="scrollView" destination="Uea-bZ-JQ3" id="meA-9v-IUx"/>
+                        <outlet property="titleView" destination="kmt-bO-I8r" id="vRm-Dq-7Kx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

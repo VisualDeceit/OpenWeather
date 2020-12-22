@@ -14,6 +14,10 @@ class LoginFormController: UIViewController {
     @IBOutlet var loginInput: UITextField!
     @IBOutlet var passwordInput: UITextField!
     @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var loginTitleView: UILabel!
+    @IBOutlet var passwordTitleView: UILabel!
+    @IBOutlet var titleView: UILabel!
+    @IBOutlet var logInButton: UIButton!
     
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
@@ -23,6 +27,7 @@ class LoginFormController: UIViewController {
             alpha: CGFloat(1.0)
         )
     }
+    
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard checkUserData() else {
@@ -63,14 +68,10 @@ class LoginFormController: UIViewController {
         // Присваиваем его UIScrollVIew
         scrollView?.addGestureRecognizer(hideKeyboardGesture)
         
-        //цвет бара
-        //navigationController?.navigationBar.barTintColor = UIColorFromRGB(rgbValue: 0xBB654C)
-        //navigationController?.navigationBar.backgroundColor = UIColorFromRGB(rgbValue: 0xBB654C)
-        //цвет кнопки
         navigationController?.navigationBar.tintColor = UIColor.white
-        //цвет текста
-        //navigationController?.navigationBar.titleTextAttributes =
+        
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
@@ -81,6 +82,11 @@ class LoginFormController: UIViewController {
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         //прячем бар
         navigationController?.navigationBar.isHidden = true
+        
+        animateTitlesAppearing()
+        animateTitleAppearing()
+        animateFieldsAppearing()
+        animateAuthButton()
         }
     
     
@@ -118,7 +124,68 @@ class LoginFormController: UIViewController {
         }
 
     
-   
+  
+    func animateTitlesAppearing() {
+        let offset = view.bounds.width
+        loginTitleView.transform = CGAffineTransform(translationX: -offset, y: 0)
+        passwordTitleView.transform = CGAffineTransform(translationX: offset, y: 0)
+        
+        UIView.animate(withDuration: 1,
+                       delay: 1,
+                       options: .curveEaseOut,
+                       animations: {
+                           self.loginTitleView.transform = .identity
+                           self.passwordTitleView.transform = .identity
+                       },
+                       completion: nil)
+    }
+    
+    func animateTitleAppearing() {
+        self.titleView.transform = CGAffineTransform(translationX: 0,
+                                                     y: -self.view.bounds.height/2)
+        
+        UIView.animate(withDuration: 1,
+                       delay: 1,
+                       usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseOut,
+                       animations: {
+                        self.titleView.transform = .identity
+                       },
+                       completion: nil)
+    }
+    
+    
+    func animateFieldsAppearing() {
+        let fadeInAnimation = CABasicAnimation(keyPath: "opacity")
+        fadeInAnimation.fromValue = 0
+        fadeInAnimation.toValue = 1
+        fadeInAnimation.duration = 1
+        fadeInAnimation.beginTime = CACurrentMediaTime() + 1
+        fadeInAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        fadeInAnimation.fillMode = CAMediaTimingFillMode.backwards
+        
+        self.loginInput.layer.add(fadeInAnimation, forKey: nil)
+        self.passwordInput.layer.add(fadeInAnimation, forKey: nil)
+    }
+
+    
+    func animateAuthButton() {
+        let animation = CASpringAnimation(keyPath: "transform.scale")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.stiffness = 200
+        animation.mass = 2
+        animation.duration = 2
+        animation.beginTime = CACurrentMediaTime() + 1
+        animation.fillMode = CAMediaTimingFillMode.backwards
+        
+        self.logInButton.layer.add(animation, forKey: nil)
+    }
+
+    
+    
+    
 
 
 }
