@@ -16,11 +16,8 @@ class WeatherCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        self.contentView.translatesAutoresizingMaskIntoConstraints = true
-        self.autoresizingMask  = .flexibleHeight
     }
-    
+        
     
     override func prepareForReuse() {
         imageView.image = nil
@@ -30,20 +27,19 @@ class WeatherCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+
+        //при первом вызове layoutSubviews(), canvas еще не знает правильный размер фрейма
+        //поэтому вычисляем через фрейм ячейки
+        canvas.layer.cornerRadius = ( self.frame.height -  40) / 2
         
         contentView.backgroundColor = .clear
-        contentView.clipsToBounds = false
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOpacity = 0.5
         contentView.layer.shadowOffset = .zero
         contentView.layer.shadowRadius = 4
+        contentView.clipsToBounds = false
 
-        //contentView.layer.shadowPath = UIBezierPath(roundedRect: canvas.bounds, cornerRadius: 20).cgPath
         
-        //contentView.layer.shadowPath = UIBezierPath(ovalIn: self.canvas.frame).cgPath
-        
-        
-        canvas.layer.cornerRadius = canvas.bounds.width / 2
     }
 
 }
