@@ -13,11 +13,21 @@ class WeatherCell: UICollectionViewCell {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var canvas: UIView!
+  
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    static let dateFormatter: DateFormatter = {
+            let df = DateFormatter()
+            df.dateFormat = "dd.MM.yyyy HH.mm"
+            return df
+        }()
+    
+    func populate(with weather: Weather) {
+        self.tempLabel.text = String(format: "%.1f°C", weather.temp)
+        let date = Date(timeIntervalSince1970: weather.date)
+        let stringDate =  WeatherCell.dateFormatter.string(from: date)
+        self.dateLabel.text = stringDate
+        self.imageView.image = UIImage(named: "storm")
     }
-        
     
     override func prepareForReuse() {
         imageView.image = nil

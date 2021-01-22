@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 let appID = "4ca4dea9f4ea2a6b32316b43be21d3a9"
 
@@ -20,7 +21,34 @@ class NetworkService {
                                 URLQueryItem(name: "units", value: "metric"),]
         return component
     }()
-  
+    
+    // Alamofire
+    func requestWeather(for city:String, complition: @escaping ([Weather]) -> Void) {
+        let host = "https://api.openweathermap.org"
+        let path = "/data/2.5/forecast"
+        let parameters: Parameters = [
+            "q": city,
+            "units": "metric",
+            "appid": appID
+        ]
+        AF.request(host + path, method: .get, parameters: parameters).responseData{ (response) in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let weather = try JSONDecoder().decode(WeatherResponse.self, from: data).list
+                  //  print(weather[0].temp)
+                    complition(weather)
+                }
+                catch {
+                    print(error)
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     /*
     //через url
      func sendRequest(for city: String) {
@@ -45,13 +73,11 @@ class NetworkService {
         if let url = urlComponent.url {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-            let session = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let session = URLSession.shared.dataTask(with: request) { (data, _, _) in
                 if let data = data {
                     let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     print(json)
                 }
-               // print("response - \n", response)
-                print("error - \n", error)
             }
             session.resume()
         }
@@ -69,13 +95,11 @@ class NetworkService {
         if let url = postComponent.url {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
-            let session = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let session = URLSession.shared.dataTask(with: request) { (data, _, _) in
                 if let data = data {
                     let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     print(json)
                 }
-                print("response - \n", response)
-                print("error - \n", error)
             }
             session.resume()
         }
@@ -91,13 +115,11 @@ class NetworkService {
         if let url = postComponent.url {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-            let session = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let session = URLSession.shared.dataTask(with: request) { (data, _, _) in
                 if let data = data {
                     let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     print(json)
                 }
-                print("response - \n", response)
-                print("error - \n", error)
             }
             session.resume()
         }

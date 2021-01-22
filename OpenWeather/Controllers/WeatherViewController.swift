@@ -12,12 +12,21 @@ class WeatherViewController: UIViewController {
     @IBOutlet var myWatherCollectionView: WeatherCollectionView!
     @IBOutlet var weekDayPicker: WeekDayPicker!
     
+    // массив с погодой
+        var weathers = [Weather]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         weekDayPicker.addTarget(self, action: #selector(dayIsSelected), for: .valueChanged)
         //регистрируем ячейку
         myWatherCollectionView.register(UINib(nibName: "WeatherCell", bundle: nil), forCellWithReuseIdentifier: "WeatherCell")
+        
+        let networkService = NetworkService()
+        networkService.requestWeather(for: "orenburg,ru") { [weak self] weathers in
+            self?.weathers = weathers
+            self?.myWatherCollectionView.reloadData()
+        }
     }
     
     //обрабатываем 
@@ -29,7 +38,7 @@ class WeatherViewController: UIViewController {
 
 extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        weathers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -37,15 +46,7 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as?
         WeatherCell
         else { return UICollectionViewCell() }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        
-        cell.tempLabel.text = "+30"
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-        cell.imageView.image = UIImage(named: "storm")
+        cell.populate(with: weathers[indexPath.row])
         return cell
     }
     

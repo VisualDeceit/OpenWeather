@@ -36,11 +36,6 @@ class LoginFormController: UIViewController {
             passwordInput.text = ""
             return false
         }
-        
-        let networkService = NetworkService()
-        networkService.sendRequest(for: "kolomna,ru")
-        //networkService.sendPostRequest()
-        //networkService.sendGetRequest()
         return true
 
     }
