@@ -26,7 +26,7 @@ class WeatherCell: UICollectionViewCell {
         let date = Date(timeIntervalSince1970: weather.date)
         let stringDate =  WeatherCell.dateFormatter.string(from: date)
         self.dateLabel.text = stringDate
-        self.imageView.image = UIImage(named: "storm")
+        self.imageView.download(from: "https://openweathermap.org/img/wn/\(weather.weatherIcon)@2x.png")
     }
     
     override func prepareForReuse() {
