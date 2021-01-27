@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import RealmSwift
 
 let appID = "4ca4dea9f4ea2a6b32316b43be21d3a9"
 
@@ -36,7 +37,7 @@ class NetworkService {
             case .success(let data):
                 do {
                     let weather = try JSONDecoder().decode(WeatherResponse.self, from: data).list
-                  //  print(weather[0].temp)
+                    self.saveWeatherData(weather)
                     complition(weather)
                 }
                 catch {
@@ -48,6 +49,26 @@ class NetworkService {
             }
         }
     }
+    
+    
+    //сохранение погодных данных в Realm
+    func saveWeatherData(_ weathers: [Weather]) {
+        // обработка исключений при работе с хранилищем
+        do {
+            // получаем доступ к хранилищу
+            let realm = try Realm()
+            // начинаем изменять хранилище
+            realm.beginWrite()
+            // кладем все объекты класса погоды в хранилище
+            realm.add(weathers)
+            // завершаем изменения хранилища
+            try realm.commitWrite()
+        } catch {
+            // если произошла ошибка, выводим ее в консоль
+            print(error)
+        }
+    }
+    
     
     /*
     //через url
