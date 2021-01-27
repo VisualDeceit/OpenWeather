@@ -8,5 +8,6 @@ target 'OpenWeather' do
   # Pods for OpenWeather
 
 pod 'Alamofire', '~> 5.2'
+pod 'RealmSwift'
 
 end
