@@ -63,6 +63,8 @@ class NetworkService {
             realm.add(weathers)
             // завершаем изменения хранилища
             try realm.commitWrite()
+            
+            print(realm.configuration.fileURL!)
         } catch {
             // если произошла ошибка, выводим ее в консоль
             print(error)
