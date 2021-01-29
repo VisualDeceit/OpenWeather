@@ -10,6 +10,7 @@ import UIKit
 
 
 struct City:Equatable {
+    var name: String
     var title: String
     var emblem:  UIImage?
 }

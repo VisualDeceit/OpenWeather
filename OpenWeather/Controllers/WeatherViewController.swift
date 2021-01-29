@@ -14,6 +14,8 @@ class WeatherViewController: UIViewController {
     
     // массив с погодой
         var weathers = [Weather]()
+
+    var currentCity: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,7 @@ class WeatherViewController: UIViewController {
         myWatherCollectionView.register(UINib(nibName: "WeatherCell", bundle: nil), forCellWithReuseIdentifier: "WeatherCell")
         
         let networkService = NetworkService()
-        networkService.requestWeather(for: "orenburg,ru") { [weak self] weathers in
+        networkService.requestWeather(for: "\(currentCity),ru") { [weak self] weathers in
             self?.weathers = weathers
             self?.myWatherCollectionView.reloadData()
         }

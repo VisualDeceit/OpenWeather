@@ -10,11 +10,12 @@ import UIKit
 class CitiesListTableViewController: UITableViewController {
 
     var cities = [
-        City(title: "Москва", emblem:  UIImage(named: "Moscow")),
-        City(title: "Санкт-Петербург",  emblem:  UIImage(named: "Piter")),
-        City(title: "Коломна", emblem:  UIImage(named: "Kolomna")),
-        City(title: "Воронеж", emblem:UIImage(named: "Voronezh")),
-        City(title: "Пенза", emblem:  UIImage(named: "Penza")),
+        City(name: "moscow", title: "Москва", emblem:  UIImage(named: "Moscow")),
+        City(name: "saint petersburg", title: "Санкт-Петербург",  emblem:  UIImage(named: "Piter")),
+        City(name: "kolomna", title: "Коломна", emblem:  UIImage(named: "Kolomna")),
+        City(name: "voronezh",title: "Воронеж", emblem:UIImage(named: "Voronezh")),
+        City(name: "penza",title: "Пенза", emblem:  UIImage(named: "Penza")),
+        City(name: "orenburg",title: "Оренбург", emblem:  UIImage(named: "Orenburg")),
     ]
     
     override func viewDidLoad() {

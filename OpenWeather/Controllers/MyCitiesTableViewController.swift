@@ -81,6 +81,15 @@ class MyCitiesTableViewController: UITableViewController {
         }
         performSegue(withIdentifier: "ShowForecast", sender: nil)
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let cotroller = segue.destination as? WeatherViewController else {
+            return
+        }
+        let currentCity = cities[tableView.indexPathForSelectedRow?.row ?? 0].name
+        cotroller.currentCity = currentCity
+    }
 
     
 }

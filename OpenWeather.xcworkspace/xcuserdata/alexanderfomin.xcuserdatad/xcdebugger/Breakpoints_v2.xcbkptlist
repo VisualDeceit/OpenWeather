@@ -52,5 +52,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3BF70FD2-2BFE-4DBB-8E78-691ECD1B022F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OpenWeather/Controllers/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3BF70FD2-2BFE-4DBB-8E78-691ECD1B022F - 212fe06e062f31f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OpenWeather.WeatherViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "OpenWeather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexanderfomin/Documents/education/iOS-applications-UI/OpenWeather/OpenWeather/Controllers/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "938">
+               </Location>
+               <Location
+                  uuid = "3BF70FD2-2BFE-4DBB-8E78-691ECD1B022F - 19928397352c08c4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;OpenWeather.Weather&gt;) -&gt; () in OpenWeather.WeatherViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "OpenWeather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexanderfomin/Documents/education/iOS-applications-UI/OpenWeather/OpenWeather/Controllers/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
