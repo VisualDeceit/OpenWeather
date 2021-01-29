@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class WeatherViewController: UIViewController {
     
@@ -25,10 +26,22 @@ class WeatherViewController: UIViewController {
         myWatherCollectionView.register(UINib(nibName: "WeatherCell", bundle: nil), forCellWithReuseIdentifier: "WeatherCell")
         
         let networkService = NetworkService()
-        networkService.requestWeather(for: "\(currentCity),ru") { [weak self] weathers in
-            self?.weathers = weathers
+        networkService.requestWeather(for: "\(currentCity)") { [weak self] in
+            //self?.weathers = weathers
+            self?.loadData()
             self?.myWatherCollectionView.reloadData()
         }
+    }
+    
+    func loadData() {
+            do {
+                let realm = try Realm()
+                let weathers = realm.objects(Weather.self).filter("city == %@", currentCity)
+                self.weathers = Array(weathers)
+            } catch {
+    // если произошла ошибка, выводим ее в консоль
+                print(error)
+            }
     }
     
     //обрабатываем 

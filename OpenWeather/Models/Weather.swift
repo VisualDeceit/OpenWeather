@@ -37,6 +37,8 @@ class Weather: Object, Decodable {
         let windValues = try values.nestedContainer(keyedBy: WindKeys.self, forKey: .wind)
         self.windSpeed = try windValues.decode(Double.self, forKey: .speed)
         self.windDegrees = try windValues.decode(Double.self, forKey: .deg)
+        
+        self.city = city
                 
             }
     

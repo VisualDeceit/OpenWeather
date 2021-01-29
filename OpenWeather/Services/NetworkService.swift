@@ -24,7 +24,7 @@ class NetworkService {
     }()
     
     // Alamofire
-    func requestWeather(for city:String, complition: @escaping ([Weather]) -> Void) {
+    func requestWeather(for city: String, complition: @escaping () -> Void) {
         let host = "https://api.openweathermap.org"
         let path = "/data/2.5/forecast"
         let parameters: Parameters = [
@@ -37,8 +37,10 @@ class NetworkService {
             case .success(let data):
                 do {
                     let weather = try JSONDecoder().decode(WeatherResponse.self, from: data).list
-                    self.saveWeatherData(weather)
-                    complition(weather)
+                    weather.forEach{$0.city = city}
+                    self.saveWeatherData(weather, city)
+                    //complition(weather)
+                    complition()
                 }
                 catch {
                     print(error)
@@ -52,13 +54,17 @@ class NetworkService {
     
     
     //сохранение погодных данных в Realm
-    func saveWeatherData(_ weathers: [Weather]) {
+    func saveWeatherData(_ weathers: [Weather], _ city: String) {
         // обработка исключений при работе с хранилищем
         do {
             // получаем доступ к хранилищу
             let realm = try Realm()
+            // все старые погодные данные для текущего города
+            let oldWeathers = realm.objects(Weather.self).filter("city == %@", city)
             // начинаем изменять хранилище
             realm.beginWrite()
+            // удаляем старые данные
+            realm.delete(oldWeathers)
             // кладем все объекты класса погоды в хранилище
             realm.add(weathers)
             // завершаем изменения хранилища
