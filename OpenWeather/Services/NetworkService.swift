@@ -24,7 +24,7 @@ class NetworkService {
     }()
     
     // Alamofire
-    func requestWeather(for city: String, complition: @escaping () -> Void) {
+    func requestWeather(for city: String) {
         let host = "https://api.openweathermap.org"
         let path = "/data/2.5/forecast"
         let parameters: Parameters = [
@@ -39,8 +39,6 @@ class NetworkService {
                     let weather = try JSONDecoder().decode(WeatherResponse.self, from: data).list
                     weather.forEach{$0.city = city}
                     self.saveWeatherData(weather, city)
-                    //complition(weather)
-                    complition()
                 }
                 catch {
                     print(error)
@@ -54,27 +52,29 @@ class NetworkService {
     
     
     //сохранение погодных данных в Realm
-    func saveWeatherData(_ weathers: [Weather], _ city: String) {
+    func saveWeatherData(_ weathers: [Weather],_ city: String) {
         // обработка исключений при работе с хранилищем
         do {
             // получаем доступ к хранилищу
             let realm = try Realm()
+            // получаем город
+            guard let city = realm.object(ofType: City.self, forPrimaryKey: city) else { return }
             // все старые погодные данные для текущего города
-            let oldWeathers = realm.objects(Weather.self).filter("city == %@", city)
+            let oldWeathers = city.weathers
             // начинаем изменять хранилище
             realm.beginWrite()
             // удаляем старые данные
             realm.delete(oldWeathers)
             // кладем все объекты класса погоды в хранилище
-            realm.add(weathers)
-            // завершаем изменения хранилища
+            city.weathers.append(objectsIn: weathers)
+            // завершаем изменение хранилища
             try realm.commitWrite()
-            print(realm.configuration.fileURL ?? "")
         } catch {
             // если произошла ошибка, выводим ее в консоль
             print(error)
         }
     }
+    
     
     
     /*

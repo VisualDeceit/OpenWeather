@@ -13,8 +13,9 @@ class WeatherViewController: UIViewController {
     @IBOutlet var myWatherCollectionView: WeatherCollectionView!
     @IBOutlet var weekDayPicker: WeekDayPicker!
     
-    // массив с погодой
-        var weathers = [Weather]()
+    var weathers: List<Weather>!
+    var token: NotificationToken?
+    
 
     var currentCity: String = ""
     
@@ -26,23 +27,33 @@ class WeatherViewController: UIViewController {
         myWatherCollectionView.register(UINib(nibName: "WeatherCell", bundle: nil), forCellWithReuseIdentifier: "WeatherCell")
         
         let networkService = NetworkService()
-        networkService.requestWeather(for: "\(currentCity)") { [weak self] in
-            //self?.weathers = weathers
-            self?.loadData()
-            self?.myWatherCollectionView.reloadData()
-        }
+        networkService.requestWeather(for: currentCity)
+        pairTableAndRealm()
+
     }
     
-    func loadData() {
-            do {
-                let realm = try Realm()
-                let weathers = realm.objects(Weather.self).filter("city == %@", currentCity)
-                self.weathers = Array(weathers)
-            } catch {
-    // если произошла ошибка, выводим ее в консоль
-                print(error)
+    func pairTableAndRealm() {
+        guard let realm = try? Realm(), let city = realm.object(ofType: City.self, forPrimaryKey: currentCity) else { return }
+        
+        weathers = city.weathers
+        
+        token = weathers.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let collectionView = self?.myWatherCollectionView else { return }
+            switch changes {
+            case .initial:
+                collectionView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                collectionView.performBatchUpdates({
+                    collectionView.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
+                    collectionView.deleteItems(at: deletions.map({ IndexPath(row: $0, section: 0)}))
+                    collectionView.reloadItems(at: modifications.map({ IndexPath(row: $0, section: 0) }))
+                }, completion: nil)
+            case .error(let error):
+                fatalError("\(error)")
             }
+        }
     }
+
     
     //обрабатываем 
     @objc func dayIsSelected(){

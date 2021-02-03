@@ -156,7 +156,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7ms-8D-fHj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="dU9-hJ-yAk" kind="show" identifier="" id="tpG-cA-8rR"/>
+                                <action selector="addButtonPressed:" destination="Hro-a9-H4D" id="wga-ZE-Ttq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -241,29 +241,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZh-Jb-2X6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="76.911544227886068"/>
-        </scene>
-        <!--Cities list-->
-        <scene sceneID="f20-Z9-f6e">
-            <objects>
-                <tableViewController id="dU9-hJ-yAk" customClass="CitiesListTableViewController" customModule="OpenWeather" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="n9m-L9-nHi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="dU9-hJ-yAk" id="t6u-s7-yjG"/>
-                            <outlet property="delegate" destination="dU9-hJ-yAk" id="IWM-lS-1FJ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Cities list" id="SRt-lA-HMf"/>
-                    <connections>
-                        <segue destination="rgF-rG-mzj" kind="unwind" identifier="addCity" unwindAction="addCityWithSegue:" id="1o5-9x-OPA"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cff-Zw-rQW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="rgF-rG-mzj" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1881" y="-660"/>
         </scene>
     </scenes>
     <resources>
