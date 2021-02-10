@@ -14,6 +14,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet var weekDayPicker: WeekDayPicker!
     
     var weathers: List<Weather>!
+ 
     var token: NotificationToken?
     
 
@@ -28,6 +29,7 @@ class WeatherViewController: UIViewController {
         
         let networkService = NetworkService()
         networkService.requestWeather(for: currentCity)
+       
         pairTableAndRealm()
 
     }
@@ -37,7 +39,7 @@ class WeatherViewController: UIViewController {
         
         weathers = city.weathers
 
-        token = weathers.observe { [weak self] (changes: RealmCollectionChange) in
+        token = weathers?.observe { [weak self] (changes: RealmCollectionChange) in
             guard let collectionView = self?.myWatherCollectionView else { return }
             switch changes {
             case .initial:
@@ -64,7 +66,7 @@ class WeatherViewController: UIViewController {
 
 extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        weathers.count
+        weathers?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -72,7 +74,9 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as?
         WeatherCell
         else { return UICollectionViewCell() }
-        cell.populate(with: weathers[indexPath.row])
+        if let weather = weathers?[indexPath.row] {
+        cell.populate(with: weather)
+        }
         return cell
     }
     

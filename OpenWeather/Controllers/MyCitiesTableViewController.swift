@@ -105,18 +105,24 @@ class MyCitiesTableViewController: UITableViewController {
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let city = cityes?[indexPath.row] else {return}
-
+        //guard let city = cities?[indexPath.row] else {return}
+        
         if editingStyle == .delete {
-            do {
-                let realm = try Realm()
-                realm.beginWrite()
-                realm.delete(city.weathers)
-                realm.delete(city)
-                try realm.commitWrite()
-            } catch {
-                print(error)
-            }
+            // Delete the row from the data source
+            let city = cities[indexPath.row]
+            city.ref?.removeValue()
+//            
+//            do {
+//                let realm = try Realm()
+//                realm.beginWrite()
+//                realm.delete(city.weathers)
+//                realm.delete(city)
+//                try realm.commitWrite()
+//            } catch {
+//                print(error)
+//            }
+
+       
 
 //            // Delete the row from the data source
 //            cities.remove(at: indexPath.row)
@@ -139,10 +145,9 @@ class MyCitiesTableViewController: UITableViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let cotroller = segue.destination as? WeatherViewController,
-              let currentCity = cityes?[tableView.indexPathForSelectedRow?.row ?? 0].name else {
-            return
-        }
+        guard let cotroller = segue.destination as? WeatherViewController
+        else { return }
+        let currentCity = cities[tableView.indexPathForSelectedRow?.row ?? 0].name
        
         cotroller.currentCity = currentCity
     }
@@ -177,7 +182,7 @@ class MyCitiesTableViewController: UITableViewController {
         })
         let confirmAction = UIAlertAction(title: "Добавить", style: .default) { [weak self] action in
             guard let name = alertController.textFields?[0].text else { return }
-            //self?.addCity(name: name)
+            self?.addCity(name: name)
             let city = FirebaseCity(name: name, zipcode: Int.random(in: 100000...999999))
             let cityRef = self?.ref.child(name.lowercased())
             cityRef?.setValue(city.toAnyObject())

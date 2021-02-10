@@ -58,6 +58,7 @@ class NetworkService {
             // получаем доступ к хранилищу
             let realm = try Realm()
             // получаем город
+            print(realm.configuration.fileURL ?? "")
             guard let city = realm.object(ofType: City.self, forPrimaryKey: city) else { return }
             // все старые погодные данные для текущего города
             let oldWeathers = city.weathers
