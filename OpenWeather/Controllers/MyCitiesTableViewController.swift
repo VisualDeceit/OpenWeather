@@ -7,22 +7,52 @@
 
 import UIKit
 import RealmSwift
+import FirebaseAuth
+import FirebaseDatabase
 
 class MyCitiesTableViewController: UITableViewController {
     
     var cityes: Results<City>?
     var token: NotificationToken?
     
+    private var cities = [FirebaseCity]()
+    private let ref = Database.database(url: "https://openweather-7de5e-default-rtdb.europe-west1.firebasedatabase.app").reference(withPath: "cities")
+    
     @IBAction func addButtonPressed(_ sender: Any) {
         showAddCityForm()
     
     }
+    @IBAction func logOutButtonPresswd(_ sender: Any) {
+   
+//        do {
+//            try  Auth.auth().signOut()
+//            self.navigationController?.popViewController(animated: true)
+//
+//        }
+//        catch (let error) {
+//            print(error)
+//        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: "CityTableViewCell", bundle: nil), forCellReuseIdentifier: "CityCell_ID")
         
-        pairTableAndRealm()
+        ref.observe(.value) { (snapshot) in
+            var cities: [FirebaseCity] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   let city = FirebaseCity(snapshot: snapshot) {
+                    cities.append(city)
+                }
+            }
+            self.cities = cities
+            self.tableView.reloadData()
+        }
+        
+       // pairTableAndRealm()
 
     }
     
@@ -54,7 +84,8 @@ class MyCitiesTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cityes?.count ?? 0
+        //return cityes?.count ?? 0
+        return cities.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,10 +94,11 @@ class MyCitiesTableViewController: UITableViewController {
                 as? CityTableViewCell
         else { return UITableViewCell() }
         
-        if let city = cityes?[indexPath.row] {
-            cell.cityLabel.text = city.name
-        }
-        //cell.cityLabel.text = cityes?[indexPath.row].name ?? ""
+//        if let city = cityes?[indexPath.row] {
+//            cell.cityLabel.text = city.name
+//        }
+        let city = cities[indexPath.row]
+        cell.cityLabel.text = city.name
         
         return cell
     }
@@ -145,8 +177,13 @@ class MyCitiesTableViewController: UITableViewController {
         })
         let confirmAction = UIAlertAction(title: "Добавить", style: .default) { [weak self] action in
             guard let name = alertController.textFields?[0].text else { return }
-            self?.addCity(name: name)
+            //self?.addCity(name: name)
+            let city = FirebaseCity(name: name, zipcode: Int.random(in: 100000...999999))
+            let cityRef = self?.ref.child(name.lowercased())
+            cityRef?.setValue(city.toAnyObject())
         }
+        
+       
         alertController.addAction(confirmAction)
         let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)

@@ -10,4 +10,8 @@ target 'OpenWeather' do
 pod 'Alamofire', '~> 5.2'
 pod 'RealmSwift'
 
+pod 'Firebase/Auth'
+pod 'Firebase/Firestore'
+pod 'Firebase/Database'
+
 end

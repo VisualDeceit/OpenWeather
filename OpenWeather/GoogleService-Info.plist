@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>598845378319-qct1km3orr1p3ev4s3dci7h1m4acbbno.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.598845378319-qct1km3orr1p3ev4s3dci7h1m4acbbno</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDzuUcjGsD7TuEfn9Ttk9729DX5YbWKpi8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>598845378319</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ru.50.AlexanderFomin.OpenWeather</string>
+	<key>PROJECT_ID</key>
+	<string>openweather-7de5e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>openweather-7de5e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:598845378319:ios:efa6fcdcc2a4ce242f787a</string>
+</dict>
+</plist>

@@ -27,6 +27,8 @@
 		15D45D4C258DDAB000D50382 /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D45D4A258DDAB000D50382 /* WeatherCell.xib */; };
 		15D91F3625BB192800169520 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D91F3525BB192800169520 /* Weather.swift */; };
 		15D91F3A25BB400300169520 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D91F3925BB400300169520 /* ImageView.swift */; };
+		15DFCB3825D00BF700BC8CD5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15DFCB3725D00BF700BC8CD5 /* GoogleService-Info.plist */; };
+		15DFCB3C25D0393C00BC8CD5 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFCB3B25D0393C00BC8CD5 /* Firebase.swift */; };
 		F7C0A2709DDEB0337AE5DFA7 /* Pods_OpenWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE912B883382A074520520D5 /* Pods_OpenWeather.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +55,8 @@
 		15D45D4A258DDAB000D50382 /* WeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
 		15D91F3525BB192800169520 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		15D91F3925BB400300169520 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		15DFCB3725D00BF700BC8CD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		15DFCB3B25D0393C00BC8CD5 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		97257AA53A6F74F66A82C366 /* Pods-OpenWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeather.debug.xcconfig"; path = "Target Support Files/Pods-OpenWeather/Pods-OpenWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		BE912B883382A074520520D5 /* Pods_OpenWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5989E0A865D7985782792B /* Pods-OpenWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenWeather.release.xcconfig"; path = "Target Support Files/Pods-OpenWeather/Pods-OpenWeather.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 			children = (
 				15D91F3825BB3FE900169520 /* Extensions */,
 				15654C0425769BE6006DD81E /* Info.plist */,
+				15DFCB3725D00BF700BC8CD5 /* GoogleService-Info.plist */,
 				15654BF625769BE4006DD81E /* AppDelegate.swift */,
 				15626402258E190700DEA711 /* Layouts */,
 				15654BF825769BE4006DD81E /* SceneDelegate.swift */,
@@ -129,6 +134,7 @@
 			children = (
 				15D2C6C0258D0E0100D83F27 /* City.swift */,
 				15D91F3525BB192800169520 /* Weather.swift */,
+				15DFCB3B25D0393C00BC8CD5 /* Firebase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +275,7 @@
 				15D2C6B2258CEE3B00D83F27 /* CityTableViewCell.xib in Resources */,
 				15654BFE25769BE4006DD81E /* Main.storyboard in Resources */,
 				15D45D4C258DDAB000D50382 /* WeatherCell.xib in Resources */,
+				15DFCB3825D00BF700BC8CD5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +338,7 @@
 				1504D91D258384BA00B4EBEE /* MyCitiesTableViewController.swift in Sources */,
 				15D91F3A25BB400300169520 /* ImageView.swift in Sources */,
 				15D2C6B1258CEE3B00D83F27 /* CityTableViewCell.swift in Sources */,
+				15DFCB3C25D0393C00BC8CD5 /* Firebase.swift in Sources */,
 				15654BF725769BE4006DD81E /* AppDelegate.swift in Sources */,
 				15626400258E18FC00DEA711 /* WeatherCollectionViewLayout.swift in Sources */,
 				15D45D4B258DDAB000D50382 /* WeatherCell.swift in Sources */,

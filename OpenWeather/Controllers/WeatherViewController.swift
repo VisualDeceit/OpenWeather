@@ -36,7 +36,7 @@ class WeatherViewController: UIViewController {
         guard let realm = try? Realm(), let city = realm.object(ofType: City.self, forPrimaryKey: currentCity) else { return }
         
         weathers = city.weathers
-        
+
         token = weathers.observe { [weak self] (changes: RealmCollectionChange) in
             guard let collectionView = self?.myWatherCollectionView else { return }
             switch changes {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 
 
@@ -19,6 +20,62 @@ class LoginFormController: UIViewController {
     @IBOutlet var titleView: UILabel!
     @IBOutlet var logInButton: UIButton!
     
+    var handle: AuthStateDidChangeListenerHandle!
+    
+    @IBAction func signinButtonPressed(_ sender: Any) {
+        guard
+              let email = loginInput.text,
+              let password = passwordInput.text,
+            email.count > 0,
+            password.count > 0
+        else {
+            showAlert(title: "Error", message: "Invalid user data entered")
+            return
+        }
+
+        Auth.auth().signIn(withEmail: email, password: password) {[weak self] (user, error) in
+            if let error = error, user == nil {
+                self?.showAlert(title: "Error", message: error.localizedDescription)
+            }
+//                else {
+//                self?.performSegue(withIdentifier: "LogIn", sender: nil)
+//            }
+        }
+        
+    }
+    
+    @IBAction func signupButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Register", message: "Register", preferredStyle: .alert)
+        alert.addTextField { (textEmail) in
+            textEmail.placeholder = "Enter your email"
+            textEmail.textContentType = .emailAddress
+        }
+        alert.addTextField { (textPassword) in
+            textPassword.placeholder = "Enter your password"
+            textPassword.textContentType = .newPassword
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+            guard let emailField = alert.textFields?[0],
+                  let passwordField = alert.textFields?[1],
+                  let email = emailField.text,
+                  let password = passwordField.text
+            else { return }
+            Auth.auth().createUser(withEmail: email, password: password) {[weak self] (user, error) in
+                if let error = error {
+                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                }
+                else {
+                    Auth.auth().signIn(withEmail: email, password: password)
+                }
+            }
+        }
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+       
+    }
+    
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
@@ -31,13 +88,22 @@ class LoginFormController: UIViewController {
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard checkUserData() else {
-            showAlert()
+            showAlert(title: "Error", message: "Invalid user data entered")
             loginInput.text = ""
             passwordInput.text = ""
             return false
         }
         return true
 
+    }
+    
+    @IBAction func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
+        do {
+            try  Auth.auth().signOut()
+        }
+        catch (let error) {
+            print(error)
+        }
     }
     
     // MARK: - Проверка авторизации
@@ -52,8 +118,8 @@ class LoginFormController: UIViewController {
     }
 
     // MARK:  - Показ alert
-    private func showAlert() {
-        let alert = UIAlertController(title: "Error", message: "Invalid user data entered", preferredStyle: .alert)
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         
         alert.addAction(action)
@@ -74,12 +140,12 @@ class LoginFormController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            
-            // Подписываемся на два уведомления: одно приходит при появлении клавиатуры
-            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
-            // Второе — когда она пропадает
-            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        super.viewWillAppear(animated)
+        
+        // Подписываемся на два уведомления: одно приходит при появлении клавиатуры
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
+        // Второе — когда она пропадает
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         //прячем бар
         navigationController?.navigationBar.isHidden = true
         
@@ -87,7 +153,17 @@ class LoginFormController: UIViewController {
         animateTitleAppearing()
         animateFieldsAppearing()
         animateAuthButton()
+        
+        handle = Auth.auth().addStateDidChangeListener{ [weak self] (auth, user) in
+            if user != nil {
+                print(user)
+                self?.performSegue(withIdentifier: "LogIn", sender: nil)
+                self?.loginInput.text = nil
+                self?.passwordInput.text = nil
+            }
         }
+        
+    }
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -96,6 +172,8 @@ class LoginFormController: UIViewController {
             NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
             NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         navigationController?.navigationBar.isHidden = false
+        
+        Auth.auth().removeStateDidChangeListener(handle)
         }
 
     
