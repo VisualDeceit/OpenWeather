@@ -32,7 +32,7 @@ class NetworkService {
             "units": "metric",
             "appid": appID
         ]
-        AF.request(host + path, method: .get, parameters: parameters).responseData{ (response) in
+        Alamofire.request(host + path, method: .get, parameters: parameters).responseData{ (response) in
             switch response.result {
             case .success(let data):
                 do {

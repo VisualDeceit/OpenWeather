@@ -7,11 +7,12 @@ target 'OpenWeather' do
 
   # Pods for OpenWeather
 
-pod 'Alamofire', '~> 5.2'
 pod 'RealmSwift'
 
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'Firebase/Database'
+pod 'PromiseKit', '~> 6.8'
+pod 'PromiseKit/Alamofire'
 
 end
