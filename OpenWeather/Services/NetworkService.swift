@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import RealmSwift
+import PromiseKit
 
 let appID = "4ca4dea9f4ea2a6b32316b43be21d3a9"
 
@@ -24,7 +25,71 @@ class NetworkService {
     }()
     
     // Alamofire
-    func requestWeather(for city: String) {
+ 
+    
+    //promis
+ /*
+    func requestWeather(for city: String) -> Promise<[Weather]> {
+        let host = "https://api.openweathermap.org"
+        let path = "/data/2.5/forecast"
+        let parameters: Parameters = [
+            "q": city,
+            "units": "metric",
+            "appid": appID
+        ]
+        
+        let promis = Promise<[Weather]> {resolver in
+            Alamofire.request(host + path, method: .get, parameters: parameters).responseData{ (response) in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let weather = try JSONDecoder().decode(WeatherResponse.self, from: data).list
+                        weather.forEach{$0.city = city}
+                        resolver.fulfill(weather)
+                        //self.saveWeatherData(weather, city)
+                    }
+                    catch {
+                        resolver.reject(error)
+                    }
+                    
+                case .failure(let error):
+                    resolver.reject(error)
+                }
+            }
+        }
+        return promis
+    }
+    */
+    
+    //PromiseKit/Alamofire
+    func requestWeather(for city: String, on queue: DispatchQueue = .main) -> Promise<[Weather]> {
+        let host = "https://api.openweathermap.org"
+        let path = "/data/2.5/forecast"
+        let parameters: Parameters = [
+            "q": city,
+            "units": "metric",
+            "appid": appID
+        ]
+        
+        return Alamofire.request(host + path, method: .get, parameters: parameters)
+            .responseData()
+            .map(on: queue) { (data, responsese) -> [Weather] in
+                do {
+                    let weathers = try JSONDecoder().decode(WeatherResponse.self, from: data).list
+                    weathers.forEach{$0.city = city}
+                    return  weathers
+                }
+                catch {
+                    throw error
+                }
+            }
+    }
+    
+    
+ /*
+     // OLD
+     
+     func requestWeather(for city: String) {
         let host = "https://api.openweathermap.org"
         let path = "/data/2.5/forecast"
         let parameters: Parameters = [
@@ -49,7 +114,7 @@ class NetworkService {
             }
         }
     }
-    
+     */
     
     //сохранение погодных данных в Realm
     func saveWeatherData(_ weathers: [Weather],_ city: String) {
@@ -76,7 +141,33 @@ class NetworkService {
         }
     }
     
+   /*
+    //сохранение погодных данных в Realm
+    func saveWeatherData(_ weathers: [Weather],_ city: String) {
+        // обработка исключений при работе с хранилищем
+        do {
+            // получаем доступ к хранилищу
+            let realm = try Realm()
+            // получаем город
+            print(realm.configuration.fileURL ?? "")
+            guard let city = realm.object(ofType: City.self, forPrimaryKey: city) else { return }
+            // все старые погодные данные для текущего города
+            let oldWeathers = city.weathers
+            // начинаем изменять хранилище
+            realm.beginWrite()
+            // удаляем старые данные
+            realm.delete(oldWeathers)
+            // кладем все объекты класса погоды в хранилище
+            city.weathers.append(objectsIn: weathers)
+            // завершаем изменение хранилища
+            try realm.commitWrite()
+        } catch {
+            // если произошла ошибка, выводим ее в консоль
+            print(error)
+        }
+    }
     
+    */
     
     /*
     //через url

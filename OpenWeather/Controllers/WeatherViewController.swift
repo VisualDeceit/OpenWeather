@@ -28,9 +28,16 @@ class WeatherViewController: UIViewController {
         myWatherCollectionView.register(UINib(nibName: "WeatherCell", bundle: nil), forCellWithReuseIdentifier: "WeatherCell")
         
         let networkService = NetworkService()
-        networkService.requestWeather(for: currentCity)
+        networkService.requestWeather(for: currentCity, on: .global())
+            .done { (promise) in
+                networkService.saveWeatherData(promise, self.currentCity)
+                self.pairTableAndRealm()
+            }
+            .catch { (error) in
+                print(error)
+            }
        
-        pairTableAndRealm()
+
 
     }
     
